@@ -16,9 +16,7 @@ export async function getPostsByUser(userId: number) {
     
     const result = userPosts.map((post) => ({
       id: post.id,
-      userId: post.userId,
       title: post.title,
-      body: post.body,
     }));
 
     return result;
