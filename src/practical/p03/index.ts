@@ -1,1 +1,35 @@
-export function mapPostWithCommentCount() {}
+import axios from "axios";
+
+interface Post {
+  id: number;
+  userId: number;
+  title: string;
+  body: string;
+}
+
+interface Comments {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}
+
+export async function mapPostWithCommentCount() {
+  const responsePosts = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
+  const responseComments = await axios.get<Comments[]>('https://jsonplaceholder.typicode.com/comments');
+  
+  const posts = responsePosts.data;
+  const comments = responseComments.data;
+
+  const result = posts.map(post => {
+    const totalComments = comments.filter(comment => comment.postId === post.id).length;
+    return {
+      postid: post.id,
+      title: post.title,
+      totalComments: totalComments
+    };
+  });
+
+  return result;
+}
