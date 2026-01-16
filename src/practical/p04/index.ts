@@ -17,13 +17,12 @@ export async function countCommentsByPost() {
       return {};
     }
 
-    if (comments.some(comment => comment.postId == null)) {
-      return {};
-    }
-
     const commentCountByPost : Record<number, number> = {};
     
     comments.forEach(comment => {
+      if (comment.postId == null) {
+        return;
+      }
       if (commentCountByPost[comment.postId]) {
         commentCountByPost[comment.postId] += 1;
       } else {
