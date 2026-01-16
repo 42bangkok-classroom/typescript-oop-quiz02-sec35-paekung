@@ -17,6 +17,10 @@ export async function countCommentsByPost() {
       return {};
     }
 
+    if (comments[0].postId === undefined) {
+      return {};
+    }
+
     const commentCountByPost : Record<number, number> = {};
     
     comments.forEach(comment => {
