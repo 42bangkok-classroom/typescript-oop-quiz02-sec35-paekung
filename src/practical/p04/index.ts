@@ -17,7 +17,7 @@ export async function countCommentsByPost() {
       return {};
     }
 
-    if (comments[0].postId === undefined) {
+    if (comments.some(comment => comment.postId == null)) {
       return {};
     }
 
