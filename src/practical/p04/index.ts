@@ -13,13 +13,7 @@ export async function countCommentsByPost() {
     const responseComments = await axios.get<Comments[]>('https://jsonplaceholder.typicode.com/comments');
     const comments = responseComments.data;
 
-    // {
-    //   1: 5,
-    //   2: 5,
-    //   3: 5
-    // }
-
-    const commentCountByPost = {};
+    const commentCountByPost : Record<number, number> = {};
     
     comments.forEach(comment => {
       if (commentCountByPost[comment.postId]) {
