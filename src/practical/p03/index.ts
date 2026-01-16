@@ -16,20 +16,24 @@ interface Comments {
 }
 
 export async function mapPostWithCommentCount() {
-  const responsePosts = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
-  const responseComments = await axios.get<Comments[]>('https://jsonplaceholder.typicode.com/comments');
-  
-  const posts = responsePosts.data;
-  const comments = responseComments.data;
+  try {
+    const responsePosts = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
+    const responseComments = await axios.get<Comments[]>('https://jsonplaceholder.typicode.com/comments');
+    
+    const posts = responsePosts.data;
+    const comments = responseComments.data;
 
-  const result = posts.map(post => {
-    const totalComments = comments.filter(comment => comment.postId === post.id).length;
-    return {
-      postid: post.id,
-      title: post.title,
-      totalComments: totalComments
-    };
-  });
+    const result = posts.map(post => {
+      const totalComments = comments.filter(comment => comment.postId === post.id).length;
+      return {
+        postid: post.id,
+        title: post.title,
+        totalComments: totalComments
+      };
+    });
 
-  return result;
+    return result;
+  } catch (error) {
+    return [];
+  }
 }
