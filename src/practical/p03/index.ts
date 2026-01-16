@@ -17,8 +17,8 @@ interface Comments {
 
 export async function mapPostWithCommentCount() {
   try {
-    const responsePosts = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts');
-    const responseComments = await axios.get<Comments[]>('https://jsonplaceholder.typicode.com/comments');
+    const responsePosts = await axios.get<Post[]>('https://jsonplaceholder.typicode.com/posts1');
+    const responseComments = await axios.get<Comments[]>('https://jsonplaceholder.typicode.com/comments1');
     
     const posts = responsePosts.data;
     const comments = responseComments.data;
