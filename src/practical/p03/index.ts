@@ -26,7 +26,7 @@ export async function mapPostWithCommentCount() {
     const result = posts.map(post => {
       const totalComments = comments.filter(comment => comment.postId === post.id).length;
       return {
-        postid: post.id,
+        postId: post.id,
         title: post.title,
         totalComments: totalComments
       };
